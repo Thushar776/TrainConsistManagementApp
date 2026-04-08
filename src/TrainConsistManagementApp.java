@@ -2,54 +2,39 @@ import java.util.*;
 
 public class TrainConsistManagementApp {
 
-    static class CargoSafetyException extends RuntimeException {
-        public CargoSafetyException(String message) {
-            super(message);
-        }
-    }
-
-    static class GoodsBogie {
-        String type;
-        String cargo;
-
-        GoodsBogie(String type) {
-            this.type = type;
-        }
-
-        void assignCargo(String cargo) {
-            try {
-                if (type.equals("Rectangular") && cargo.equals("Petroleum")) {
-                    throw new CargoSafetyException("Unsafe cargo assignment!");
-                }
-                this.cargo = cargo;
-                System.out.println("Cargo assigned successfully -> " + cargo);
-                System.out.println("Cargo validation completed for " + type + " bogie");
-
-            } catch (CargoSafetyException e) {
-                System.out.println("Error: " + e.getMessage());
-                System.out.println("Cargo validation completed for " + type + " bogie");
-
-            } finally {
-                // always executes (logging / cleanup)
-            }
-        }
-    }
-
     public static void main(String[] args) {
 
         System.out.println("====================================");
-        System.out.println("UC15 - Safe Cargo Assignment");
+        System.out.println("UC16 - Manual Sorting using Bubble Sort");
         System.out.println("====================================");
 
-        GoodsBogie b1 = new GoodsBogie("Cylindrical");
-        b1.assignCargo("Petroleum");
+        int[] capacities = {72, 56, 24, 70, 60};
 
         System.out.println();
+        System.out.println("Original Capacities:");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
 
-        GoodsBogie b2 = new GoodsBogie("Rectangular");
-        b2.assignCargo("Petroleum");
+        for (int i = 0; i < capacities.length - 1; i++) {
+            for (int j = 0; j < capacities.length - i - 1; j++) {
+                if (capacities[j] > capacities[j + 1]) {
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
 
         System.out.println();
-        System.out.println("UC15 runtime handling completed...");
+        System.out.println();
+        System.out.println("Sorted Capacities (Ascending):");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
+
+        System.out.println();
+        System.out.println();
+        System.out.println("UC16 sorting completed...");
     }
 }
