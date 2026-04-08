@@ -16,33 +16,31 @@ public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
         System.out.println("====================================");
-        System.out.println("UC8 - Filter Passenger Bogies Using Streams");
+        System.out.println("UC9 - Group Bogies by Type");
         System.out.println("====================================");
 
         List<Bogie> bogieList = new ArrayList<>();
 
         bogieList.add(new Bogie("Sleeper", 72));
         bogieList.add(new Bogie("AC Chair", 56));
+        bogieList.add(new Bogie("Sleeper", 80));
         bogieList.add(new Bogie("First Class", 24));
-        bogieList.add(new Bogie("General", 90));
+        bogieList.add(new Bogie("AC Chair", 60));
+
+        Map<String, List<Bogie>> grouped = bogieList.stream()
+                .collect(Collectors.groupingBy(b -> b.name));
 
         System.out.println();
-        System.out.println("Original Bogie List:");
-        for (Bogie b : bogieList) {
-            System.out.println(b.name + " -> " + b.capacity);
-        }
+        System.out.println("Grouped Bogies:");
 
-        List<Bogie> filtered = bogieList.stream()
-                .filter(b -> b.capacity > 60)
-                .collect(Collectors.toList());
-
-        System.out.println();
-        System.out.println("Filtered Bogies (Capacity > 60):");
-        for (Bogie b : filtered) {
-            System.out.println(b.name + " -> " + b.capacity);
+        for (Map.Entry<String, List<Bogie>> entry : grouped.entrySet()) {
+            System.out.println(entry.getKey() + " :");
+            for (Bogie b : entry.getValue()) {
+                System.out.println("  " + b.name + " -> " + b.capacity);
+            }
         }
 
         System.out.println();
-        System.out.println("UC8 filtering completed...");
+        System.out.println("UC9 grouping completed...");
     }
 }
