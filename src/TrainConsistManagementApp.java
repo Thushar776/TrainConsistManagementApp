@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 public class TrainConsistManagementApp {
 
@@ -75,5 +76,38 @@ public class TrainConsistManagementApp {
 
         System.out.println();
         System.out.println("UC3 uniqueness validation completed...");
+
+        System.out.println();
+        System.out.println("====================================");
+        System.out.println("UC4 - Maintain Ordered Bogie Consist");
+        System.out.println("====================================");
+
+        LinkedList<String> train = new LinkedList<>();
+
+        train.add("Engine");
+        train.add("Sleeper");
+        train.add("AC");
+        train.add("Cargo");
+        train.add("Guard");
+
+        System.out.println();
+        System.out.println("Initial Train Consist:");
+        System.out.println(train);
+
+        train.add(2, "Pantry Car");
+
+        System.out.println();
+        System.out.println("After Inserting 'Pantry Car' at position 2:");
+        System.out.println(train);
+
+        train.removeFirst();
+        train.removeLast();
+
+        System.out.println();
+        System.out.println("After Removing First and Last Bogie:");
+        System.out.println(train);
+
+        System.out.println();
+        System.out.println("UC4 ordered consist operations completed...");
     }
 }
